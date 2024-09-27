@@ -1,7 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import { RootStackParamList } from '../App';
 import { useFonts } from "expo-font";
+import { Button } from "react-native-ui-lib";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -13,12 +14,10 @@ export default function HomeScreen({ navigation }: Props) {
     return (
   <View>
         <Text style={{ fontFamily: 'Proxima-Nova-Semibold' }}>Feed</Text>
-        <Button
-          title="Go to Details"
-          onPress={() =>
+
+        <Button label={'Problems'} size={Button.sizes.medium}           onPress={() =>
             navigation.navigate('Problems')
-          }
-        />
+          }/>
       </View>
     );
   }

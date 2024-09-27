@@ -22,8 +22,11 @@ const SolutionModule: React.FC<{ sId: string }> = ({ sId }) => {
       console.log(`correct answer: ${correctAnswer}\n`);
       console.log(`option: ${option}\n`);  
       if(qIndex == currentQuestionIndex){
+        console.log(`$1: ${selectedOption} \n`);
           setSelectedOption(option);
-          if(selectedOption == correctAnswer) {
+          console.log(`$2: ${selectedOption} \n`);
+          if(option == correctAnswer) {
+            console.log(`${aText} a\n`);
             handleNextQuestion(qText, aText);
           }
         }

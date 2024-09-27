@@ -27,7 +27,7 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Proxima-Nova/ProximaNova-Semibold.ttf"]
+          "fonts": ["./assets/fonts/Proxima-Nova/ProximaNova-Black.ttf","./assets/fonts/Proxima-Nova/ProximaNova-Semibold.ttf"]
         }
       ]
     ]
