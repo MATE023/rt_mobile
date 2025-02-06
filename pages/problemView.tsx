@@ -80,7 +80,7 @@ export default function ProblemScreen({ route, navigation }: Props) {
     }
 
     useEffect(() => {
-        axios.get<Problem>(`https://rtapi-git-main-mateos-projects-b74250f3.vercel.app/problems/${problemId}`)
+        axios.get<Problem>(`https://rt-api-nf0n.onrender.com/problems/${problemId}`)
         .then(response => {
             setData(response.data);
         })
@@ -89,7 +89,7 @@ export default function ProblemScreen({ route, navigation }: Props) {
         });
         console.log("run");
 
-        axios.get<Solution[]>(`https://rtapi-git-main-mateos-projects-b74250f3.vercel.app/problems/${problemId}/solutions`)
+        axios.get<Solution[]>(`https://rt-api-nf0n.onrender.com/problems/${problemId}/solutions`)
         .then(response => {
             setSolutions(response.data);
         })

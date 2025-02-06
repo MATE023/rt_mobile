@@ -39,7 +39,7 @@ const SolutionModule: React.FC<{ sId: string }> = ({ sId }) => {
       };
 
     useEffect(() => {
-      axios.get<Question[]>(`https://rtapi-git-main-mateos-projects-b74250f3.vercel.app/solutions/${sId}/questions`)
+      axios.get<Question[]>(`https://rt-api-nf0n.onrender.com/problems/solutions/${sId}/questions`)
       .then(response => {
           setQuestions(response.data);
           for (const q of questions) 

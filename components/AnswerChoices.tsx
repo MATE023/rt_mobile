@@ -8,7 +8,7 @@ const AnswerChoices: React.FC<{ current: boolean, answerChoice: string, cAnswer:
     const [answerText, setAnswerText] = useState("");
     
     useEffect(() => {
-        axios.get<Answer>(`https://rtapi-git-main-mateos-projects-b74250f3.vercel.app/answers/${answerChoice}`)
+        axios.get<Answer>(`https://rt-api-nf0n.onrender.com/problems/answers/${answerChoice}`)
         .then(response => {
             const a = response.data;
             setAnswerText(a.content);
