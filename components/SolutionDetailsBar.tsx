@@ -15,7 +15,7 @@ const SolutionDetailsBar: React.FC<{ solutionId: string }> = ({ solutionId }) =>
     const [spaceComplexity, setSpaceComplexity] = useState("");
 
     useEffect(() => {
-      axios.get<Solution>(`https://rtapi-git-main-mateos-projects-b74250f3.vercel.app/solutions/${solutionId}`)
+      axios.get<Solution>(`https://rt-api-nf0n.onrender.com/problems/solutions/${solutionId}`)
       .then(response => {
           const s = response.data;
           setTimeComplexity(s.timeComplexity);

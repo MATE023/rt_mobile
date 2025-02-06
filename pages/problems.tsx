@@ -23,7 +23,7 @@ export default function ProblemsScreen({ route, navigation }: Props) {
     }
 
     useEffect(() => {
-        axios.get<Problem[]>('https://rtapi-git-main-mateos-projects-b74250f3.vercel.app/problems')
+        axios.get<Problem[]>('https://rt-api-nf0n.onrender.com/problems')
         .then(response => {
             setData(response.data);
         })
