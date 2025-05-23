@@ -5,7 +5,7 @@ import { View, Text } from 'react-native-ui-lib';
 import { Solution } from '../models/Solution';
 import styles from '../assets/styles';
 
-const SolutionDetailsBar: React.FC<{ solutionId: string }> = ({ solutionId }) => {
+const SolutionDetailsBar: React.FC<{ problemId: string }> = ({ problemId }) => {
     const [loaded, error] = useFonts({
         'Proxima-Nova-Light': require('../assets/fonts/Proxima-Nova/ProximaNova-Light.ttf'),
         'Proxima-Nova-Regular': require('../assets/fonts/Proxima-Nova/ProximaNova-Regular.ttf'),
@@ -15,7 +15,7 @@ const SolutionDetailsBar: React.FC<{ solutionId: string }> = ({ solutionId }) =>
     const [spaceComplexity, setSpaceComplexity] = useState("");
 
     useEffect(() => {
-      axios.get<Solution>(`https://rt-api-nf0n.onrender.com/problems/solutions/${solutionId}`)
+      axios.get<Solution>(`https://rt-api-nf0n.onrender.com/solutions/problems/${problemId}`)
       .then(response => {
           const s = response.data;
           setTimeComplexity(s.timeComplexity);

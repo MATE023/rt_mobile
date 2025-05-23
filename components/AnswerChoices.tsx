@@ -8,7 +8,7 @@ const AnswerChoices: React.FC<{ current: boolean, answerChoice: string, cAnswer:
     const [answerText, setAnswerText] = useState("");
     
     useEffect(() => {
-        axios.get<Answer>(`https://rt-api-nf0n.onrender.com/problems/answers/${answerChoice}`)
+        axios.get<Answer>(`https://rt-api-nf0n.onrender.com/answers/${answerChoice}`)
         .then(response => {
             const a = response.data;
             setAnswerText(a.content);
@@ -21,14 +21,14 @@ const AnswerChoices: React.FC<{ current: boolean, answerChoice: string, cAnswer:
     
     return (
     <View>
-        {(current) ? (
+        {(current == true) ? (
             <View >
                 <RadioButton value={answerChoice} size={15} label={answerText} labelStyle={styles.answerChoiceText} onPress={() => onAnswerClick(answerChoice, cAnswer, index, qText, answerText)}/>
             </View>  
 
             ) : (                                    
             <View>
-                <RadioButton value={answerChoice} size={15} label={answerText} labelStyle={styles.answerChoiceText} onPress={() => onAnswerClick(answerChoice, cAnswer, index, qText, answerText)}/>
+                <RadioButton disabled value={answerChoice} size={15} label={answerText} labelStyle={styles.answerChoiceText} onPress={() => onAnswerClick(answerChoice, cAnswer, index, qText, answerText)}/>
             </View>  
             )}
     </View>

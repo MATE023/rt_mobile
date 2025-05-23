@@ -89,7 +89,7 @@ export default function ProblemScreen({ route, navigation }: Props) {
         });
         console.log("run");
 
-        axios.get<Solution[]>(`https://rt-api-nf0n.onrender.com/problems/${problemId}/solutions`)
+        axios.get<Solution[]>(`https://rt-api-nf0n.onrender.com/solutions/problems/${problemId}`)
         .then(response => {
             setSolutions(response.data);
         })
@@ -121,8 +121,8 @@ export default function ProblemScreen({ route, navigation }: Props) {
     ))}
     </View>
     <PageDivider/>
-    <SolutionDetailsBar solutionId={currSolutionId} />
-    <SolutionModule sId ={currSolutionId} />
+    <SolutionDetailsBar problemId={problemId} />
+    <SolutionModule pId ={problemId} />
     </View>
     </ScrollView>
     
