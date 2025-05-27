@@ -18,7 +18,7 @@ const SolutionModule: React.FC<{ pId: string }> = ({ pId }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [transcript, setTranscript] = useState(new Map<string, string>());
-    const [answerChoices, setAnswerChoices] = useState<Answer[]>([]);
+    const [answerChoices, setAnswerChoices] = useState<Answer[][]>([]);
 
     const handleOptionSelect = (option: string, correctAnswer: string, qIndex: number, qText: string, aText: string) => {
       console.log(`correct answer: ${correctAnswer}\n`);
@@ -48,7 +48,14 @@ const SolutionModule: React.FC<{ pId: string }> = ({ pId }) => {
         console.log({qId});
         axios.get<Answer[]>(`https://rt-api-nf0n.onrender.com/answers/question/${qId}`)
         .then(response => {
-            setAnswerChoices(response.data);
+            let a = response.data;
+            console.log(response.data);
+            let updatedAnswers: Answer[][] = answerChoices;
+            updatedAnswers.push(a);
+            console.log(updatedAnswers);
+            setAnswerChoices(updatedAnswers);
+            console.log(`answers length: ${answerChoices.length}`)
+            console.log(answerChoices);
         })
         .catch(error => {
             console.error('Error fetching answer data:', error);
@@ -67,8 +74,8 @@ const SolutionModule: React.FC<{ pId: string }> = ({ pId }) => {
           setQuestions(response.data);
           //const qu = questions[0];
           //handleCurrentAnswerChoice(qu.id);
-          const qu = response.data[0];
-          handleCurrentAnswerChoice(qu.id);
+          //const qu = response.data[0];
+          //handleCurrentAnswerChoice(qu.id);
           for (const q of questions) 
           {
             setTranscript((transcript) => new Map(transcript.set(q.content, "")));
@@ -81,24 +88,20 @@ const SolutionModule: React.FC<{ pId: string }> = ({ pId }) => {
 
     return (
         <View padding-20 bg-grey70 br40 style={styles.questionsBox}>
-          
         <View>
               {questions.map((q, questionIndex) => (
                             <View key={q.id}>
                               {(questionIndex <= currentQuestionIndex) ? (
                                         <View>
-                                          console.log({questionIndex})
-                                          console.log({currentQuestionIndex})
                                         <View style={styles.questionSection}>
                                         <Text style={styles.questionsText}> <ReactTyped strings={[q.content]} typeSpeed={50} showCursor={false}/></Text>
                                       </View>
                                       {(questionIndex < currentQuestionIndex) ? (
                                       <View style={styles.answerChoicesSection}>
-                                        console.log("111");
                                         <RadioGroup>
-                                        {answerChoices.map((choice) => (
-                                          <View key={choice.id}>
-                                            <AnswerChoices current={(questionIndex <= currentQuestionIndex)} answerChoice={choice.id} cAnswer={q.correctAnswer} index={questionIndex} qText={q.content} onAnswerClick={handleOptionSelect}/> 
+                                        {answerChoices[questionIndex].map((choices) => (
+                                          <View key={choices?.id}>
+                                            <AnswerChoices current={(questionIndex >= currentQuestionIndex)} answerChoice={choices?.id} cAnswer={q.correctAnswer} index={questionIndex} qText={q.content} onAnswerClick={handleOptionSelect}/> 
                                           </View>
                                         ))}
                                         </RadioGroup>
@@ -108,11 +111,10 @@ const SolutionModule: React.FC<{ pId: string }> = ({ pId }) => {
                                       </View>
                                       ) : (                               
                                       <View style={styles.answerChoicesSection}>
-                                        console.log("000");     
                                         <RadioGroup>
-                                          {answerChoices.map((choice) => (
-                                            <View key={choice.id}>
-                                              <AnswerChoices current={(questionIndex <= currentQuestionIndex)} answerChoice={choice.id} cAnswer={q.correctAnswer} index={questionIndex} qText={q.content} onAnswerClick={handleOptionSelect}/> 
+                                          {answerChoices[questionIndex]?.map((choices) => (
+                                            <View key={choices.id}>
+                                              <AnswerChoices current={(questionIndex == currentQuestionIndex)} answerChoice={choices?.id} cAnswer={q.correctAnswer} index={questionIndex} qText={q.content} onAnswerClick={handleOptionSelect}/> 
                                             </View>
                                         ))}
                                         </RadioGroup>                                   
